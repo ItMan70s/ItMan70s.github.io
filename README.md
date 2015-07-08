@@ -1,5 +1,4 @@
-![itman70s](favicon.ico)
-bootstrap3-richtext
+![itman70s](favicon.ico) bootstrap3-richtext
 ===================
 Tiny bootstrap-compatible WISWYG rich text editor based on bootstrap3 and bootstrap-wysiwyg, makes it easy to create simple and beautiful wysiwyg editors. 
 Here are the key features:
