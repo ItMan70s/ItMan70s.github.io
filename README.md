@@ -9,28 +9,30 @@ Here are the key features:
 
 Usage
 -----------
-<link rel='stylesheet' href='./css/bootstrap.min.css' />
-<link rel="stylesheet" href="./css/bootstrap-theme.min.css">
-<link rel='stylesheet' href='./css/font-awesome.min.css' />
-<!--[if IE 7]>
-<link rel="stylesheet" href="./css/font-awesome-ie7.min.css">
-<![endif]-->
+Rich Input
+	Add divinput as class of input to enable it accept rich text.
+Rich Text line
+	Add richtext as class of input to enable it accept rich text.
+Rich Text
+	Add richtext as class of textarea to enable it accept rich text.
+Rich Text in line with source code
+	Add richtextcode as class of input to enable it accept rich text.
+Rich Text with source code
+	Add richtextcode as class of textarea to enable it accept rich text.	
+	
+JS/CSS files required
+	&lt;link rel='stylesheet' href='./css/bootstrap.min.css' /&gt;
+	&lt;link rel="stylesheet" href="./css/bootstrap-theme.min.css"&gt;
+	&lt;link rel='stylesheet' href='./css/font-awesome.min.css' /&gt;
+	&lt;!--[if IE 7]&gt;
+	&lt;link rel="stylesheet" href="./css/font-awesome-ie7.min.css"&gt;
+	&lt;![endif]--&gt;
 
-<link rel='stylesheet' href='./css/style.css' />
-<script src="./js/jquery.js"></script>
-<script src="./js/jquery.hotkeys.js"></script>
-<script src="./js/bootstrap.min.js"></script>
-<script src="./js/bootstrap-richtext.js"></script>
-
-
-<div id="editor" contenteditable="true" class="richtext"></div>
-* id is required. 
-<script>
-richtext("editor");  // for only one rich text 
-
-// $('.richtext').each(function () { richtext($(this).attr("id"));});  // for all rich text 
-</script> 
-
+	&lt;link rel='stylesheet' href='./css/style.css' /&gt;
+	&lt;script src="./js/jquery.js"&gt;&lt;/script&gt;
+	&lt;script src="./js/jquery.hotkeys.js"&gt;&lt;/script&gt;
+	&lt;script src="./js/bootstrap.min.js"&gt;&lt;/script&gt;
+	&lt;script src="./js/bootstrap-richtext.js"&gt;&lt;/script&gt;
 
 Dependencies
 ------------
