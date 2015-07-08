@@ -21,20 +21,39 @@
 	<script src="./js/jquery.hotkeys.js"></script>
 	<script src="./js/bootstrap.min.js"></script>
     <script src="./js/bootstrap-richtext.js"></script>
+<style>
+.bs-example {
+  width: 100%;
+  margin-right: 0;
+  margin-left: 0;
+  background-color: #fff;
+  border-color: #ddd;
+  border-width: 1px;
+  border-radius: 4px;
+  border-style: solid;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  position: relative;
+  padding: 15px 0px 0px 0px;
+}
+.bs-example pre {
+	margin-top: 15px;
+	margin-bottom: 0;
+}
+.example {
+	width: 100%;
+	padding: 15px;
+}
+</style>
 </head>
 
 <body >
 <div class="container">
 	<div class="jumbotron homepage" style="margin-top:40px" align="center">
 		<h1>Bootstrap 3 Rich Text</h1>
-		<h2 class="right"><small>Simple and Beautiful rich text editor</small></h2>
-			<a class="btn btn-lg btn-primary btn-shadow" href="https://github.com/ItMan70s/bootstrap3-richtext/">View project on Github</a>
 	</div>
-		<div id="editor" contenteditable="true" class="richtext"></div>
 	
-	
-		<h2>About</h2>
-		<hr />
+  <h1 class="page-header">About</h1>
 		<p>
 Tiny bootstrap-compatible WISWYG rich text editor based on <a href="http://twitter.github.com/bootstrap/" target="_blank">bootstrap3</a> and <a href="https://github.com/mindmup/bootstrap-wysiwyg/" target="_blank">bootstrap-wysiwyg</a>, makes it easy to create simple and beautiful wysiwyg editors. <br />Here are the key features:
 <ul>
@@ -45,10 +64,56 @@ Tiny bootstrap-compatible WISWYG rich text editor based on <a href="http://twitt
 </ul>
 		</p>
 		
-		<h2>Usage</h2>
-		<hr />
-		<p>
-<pre class="prettyprint linenums">
+  <h1 class="page-header">Usage</h1>
+  
+		<h2>Rich Input</h2>
+		<p>Add <code>divinput</code> as class of <code>input</code> to enable it accept rich text.</p>
+		<div class="bs-example"><label>[Sample]</label>
+			<div class="example"><input type='text' class="divinput form-control" name='simpleinput' value='' placeholder="A sample for simple rich input, try drag/copy [sample] to here"></div>
+			<pre><label>[Code]</label>
+			<div class="col-md-0"> &lt;input type='text' class="<b>divinput</b>" name='simpleinput' value='' placeholder="A sample for simple rich input "&gt; </div>
+		</pre>
+		</div>
+		
+		<h2>Rich Text line</h2>
+		<p>Add <code>richtext</code> as class of <code>input</code> to enable it accept rich text.</p>
+		<div class="bs-example"><label>[Sample]</label>
+			<div class="example"><input type='text' class="richtext form-control" name='richtl' value='' placeholder="A sample for simple rich input, try drag/copy [sample] to here"></div>
+			<pre><label>[Code]</label>
+			<div class="col-md-0"> &lt;input type='text' class="<b>richtext</b> form-control" name='richtl' value='' placeholder="A sample for simple rich input "&gt; </div>
+		</pre>
+		</div>
+		
+		<h2>Rich Text</h2>
+		<p>Add <code>richtext</code> as class of <code>textarea</code> to enable it accept rich text.</p>
+		<div class="bs-example"><label>[Sample]</label>
+			<div class="example"><textarea class='richtext' name='richt' cols=100 rows=4 title="A sample for simple rich text"></textarea></div>
+			<pre><label>[Code]</label>
+			<div class="col-md-0"> &lt;textarea class='<b>richtext</b>' name='richt' cols=100 rows=4 title="A sample for simple rich text"&gt; &lt;/textarea&gt;</div>
+		</pre>
+		</div>
+		
+		<h2>Rich Text in line with source code </h2>
+		<p>Add <code>richtextcode</code> as class of <code>input</code> to enable it accept rich text.</p>
+		<div class="bs-example"><label>[Sample]</label>
+			<div class="example"><input type='text' class="richtextcode form-control col-md-12" name='richtcl' value='' placeholder="A sample for simple rich input, try drag/copy [sample] to here"></div>
+			<pre><label>[Code]</label>
+			<div class="col-md-0"> &lt;input type='text' class="<b>richtextcode</b> col-md-12" name='richtcl' value='' placeholder="A sample for simple rich input "&gt; </div>
+		</pre>
+		</div>
+		
+		<h2>Rich Text with source code </h2>
+		<p>Add <code>richtextcode</code> as class of <code>textarea</code> to enable it accept rich text.</p>
+		<div class="bs-example"><label>[Sample]</label>
+			<div class="example"><textarea class='richtextcode col-md-12' name='richtc' cols=100 rows=4 title="A sample for simple rich text"></textarea></div>
+			<pre><label>[Code]</label>
+			<div class="col-md-0"> &lt;textarea class='<b>richtextcode</b> col-md-12' name='richtc' cols=100 rows=4 title="A sample for simple rich text"&gt; &lt;/textarea&gt;</div>
+		</pre>
+		</div>
+		
+		
+		<h2>JS/CSS files required </h2>
+		<p><pre class="prettyprint linenums">
 &lt;link rel='stylesheet' href='./css/bootstrap.min.css' /&gt;
 &lt;link rel="stylesheet" href="./css/bootstrap-theme.min.css"&gt;
 &lt;link rel='stylesheet' href='./css/font-awesome.min.css' /&gt;
@@ -61,15 +126,7 @@ Tiny bootstrap-compatible WISWYG rich text editor based on <a href="http://twitt
 &lt;script src="./js/jquery.hotkeys.js"&gt;&lt;/script&gt;
 &lt;script src="./js/bootstrap.min.js"&gt;&lt;/script&gt;
 &lt;script src="./js/bootstrap-richtext.js"&gt;&lt;/script&gt;
-
-
-<b>&lt;div id="editor" contenteditable="true" class="richtext"&gt;&lt;/div&gt;</b>
-<i style="color: green">* id is required. </i>
-&lt;script&gt;
-<b>richtext("editor"); </b> <i style="color: green">// for only one rich text </i><br />
-<b>// $('.richtext').each(function () { richtext($(this).attr("id"));}); </b> <i style="color: green">// for all rich text</i> 
-&lt;/script&gt; </pre>     
-		</p>
+</pre></p>
 		
 		<h3>Dependencies</h3>
 		<hr />
@@ -86,8 +143,8 @@ Tiny bootstrap-compatible WISWYG rich text editor based on <a href="http://twitt
 
 
 <script>
-	$('.richtext').each(function () { richtext($(this).attr("id"));});
-	// To get value of rich text, $('.richtext').html()
+	richTextOptions = {"icons": ["img/b1.png", "img/b2.png", "img/b3.png", "img/b4.png", "img/b5.png", "img/b6.png", "img/b7.png", "img/b8.png", "img/f1.png", "img/f2.png", "img/f3.png", "img/f4.png", "img/f5.png", "img/f6.png", "img/f7.png", "img/f8.png", "img/t1.png", "img/t2.png", "img/t3.png", "img/t4.png", "img/t5.png", "img/t6.png", "img/t7.png", "img/t8.png"]};
+
 </script>
 
 </body>
