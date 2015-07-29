@@ -34,11 +34,6 @@ function bindRichText() {
 		}
 	});
 	
-	$('.preview').each(function () { 
-		$(this).removeClass("preview");
-		richtextpreview($(this).attr("id") || $(this).attr("name"), fillOptions(this, options));
-	});
-	
 	$('.divinput').each(divinput);
 
 	$(document).on("focusout", ".richtext-zone", function() {showTools(this, true, false); });
@@ -157,44 +152,6 @@ function richtext(id, userOptions) {
 	return __richtext(id, userOptions);
 }
 
-function richtextpreview(id, userOptions) {
-	var oid = id;
-	id = $("#" + id)[0] ? "#" + id : "[name='" + id + "']";
-	
-	var von = "";
-	var mon = "";
-	if ($(id).attr('preview') == 'yes') {
-		von = " active";
-		mon = "";
-	} else {
-		von = "";
-		mon = " active";
-	}
-	$(id).addClass("mvc-group-m-preview");
-	$(id).wrap( '<div class="tab-content"><div class="tab-pane' + mon + '" id="' + oid + '-m"> </div></div>');
-	
-	var html = '<div class="tab-pane switch-icon">\n' + 
-			'	<a class="btn' + von + '" href="#' + oid + '-v" data-toggle="tab" title="esay mode">view</a>\n' + 
-			'	<a class="btn' + mon + '" href="#' + oid + '-m" data-toggle="tab" title="expert mode">code</a>\n' + 
-			'</div>\n' + 
-			'<div class="tab-pane' + von + '" id="' + oid + '-v" ><div id="' + oid + '-v-e" class="form-control" style="' + __getEidtorStyle(id) + '" title="' + ($(id).attr("title") || $(id).attr("placeholder") || "") + '"></div>\n' + 
-			'</div>\n';
-	$(html).insertBefore('#' + oid + '-m');
-	html = '<div class="message hide"></div>\n';
-	$(html).insertAfter('#' + oid + '-m');
-	
-	function syncup() {
-		var source = id;
-		var target = '#' + oid + '-v-e';
-		if ($(id).attr("onview") && $(id).attr("onview").length > 0) {
-			eval($(id).attr("onview") + "('" + source.replace(/'/g, "\\'") + "', '" + target.replace(/'/g, "\\'") + "');");
-		} else {
-			$(target).html($(source).val());
-		}
-	}
-	$(document).on("blur", id, syncup);
-	syncup();
-}
 function richtextcodeline(id,  options) {
 	userOptions = $.extend({}, options);
 	userOptions["p"] = "no";
@@ -223,7 +180,7 @@ function richtextcode(id,  options) {
 	$(html).insertAfter('#' + oid + '-m');
 	
 	userOptions["bottom"] = "yes";
-	userOptions["style"] = "z-index: 9; position: absolute; right: 15px; bottom: -35px; -moz-opacity:0.9; filter:alpha(opacity=90); opacity:0.9;";
+	userOptions["style"] = "z-index: 9; position: absolute; right: 15px; bottom: -30px; -moz-opacity:0.9; filter:alpha(opacity=90); opacity:0.9;";
 
 	var input = $('#' + oid + '-v-e');
 	var rtn = input.richtextbar(userOptions);
@@ -241,7 +198,7 @@ function __richtext(id, options) {
 	$('<div target-obj="' + id + '" class="editable" style="' + __getEidtorStyle(id) + '" title="' + ($(id).attr("title") || $(id).attr("placeholder") || "") + '"></div>').insertBefore(id);
 	$(id).hide();
 	
-	userOptions["style"] = "z-index: 9; position: absolute; right: 15px; top: -35px; -moz-opacity:0.9; filter:alpha(opacity=90); opacity:0.9;";
+	userOptions["style"] = "z-index: 9; position: absolute; right: 15px; top: -30px; -moz-opacity:0.9; filter:alpha(opacity=90); opacity:0.9;";
 	
 	var html = '<div class="message hide"></div>\n';
 	$(html).insertAfter(id);

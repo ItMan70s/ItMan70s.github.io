@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Html5 Rich Text</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="opensource wysiwyg rich text editor jquery bootstrap execCommand html5">
+    <meta name="description" content="This tiny jQuery Bootstrap RichText plugin turns DIV into a HTML5 rich text editor">
+	
+	<link rel="icon" type="image/ico" href="./favicon.ico">
+	<link rel='stylesheet' href='./css/bootstrap.min.css' />
+	<link rel="stylesheet" href="./css/bootstrap-theme.min.css">
+	<link rel='stylesheet' href='./css/font-awesome.min.css' />
+	<!--[if IE 7]>
+	<link rel="stylesheet" href="./css/font-awesome-ie7.min.css">
+	<![endif]-->
+	
+	<link rel='stylesheet' href='./css/style.css' />
+	<script src="./js/jquery.js"></script>
+	<script src="./js/bootstrap.min.js"></script>
+    <script src="./js/html2canvas.js"></script>
+	
+<style>
+.bs-example {
+  width: 100%;
+  margin-right: 0;
+  margin-left: 0;
+  background-color: #fff;
+  border-color: #ddd;
+  border-width: 1px;
+  border-radius: 4px;
+  border-style: solid;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  position: relative;
+  padding: 15px 0px 0px 0px;
+}
+.bs-example pre {
+	margin-top: 15px;
+	margin-bottom: 0;
+}
+.example {
+	width: 100%;
+	padding: 15px;
+}
+
+.filter { 
+  margin: 2px;
+  display: inline-block;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 17px;
+  padding: 6px;
+  min-width: 34px;
+  height: 34px;
+  color: #337ab7;
+  text-decoration: none;
+  text-align: center;
+  vertical-align: middle;
+}
+.filter:hover, .filter:focus{
+  text-decoration: none;
+  background-color: #eee;
+}
+
+.filter-circle {
+  font-size: 22px;
+}
+.filter .badge {
+  color: #5bc0de;
+  background-color: #eee;
+}
+.filter:hover .badge, .filter:focus .badge {
+  color: #337ab7;
+  background-color: #ddd;
+}
+.disabled {
+  cursor: not-allowed;
+}
+h2 .badge {
+  color: #5bc0de;
+  background-color: #ddd;
+}
+.im {
+  font-weight: bold;
+  color: #008000;
+}
+.im .badge {
+  font-weight: bold;
+  color: #008000;
+}
+.clickable {
+	cursor: pointer;
+}
+.carousel>.carousel-inner>.item>img {
+	height: 380px;
+	padding: 20px;
+	padding-bottom: 120px;
+	max-width: 95%;
+	margin-right: auto;
+  margin-left: auto;
+}
+div.carousel-caption {
+	color: #000000;
+	padding: 0px 0px 20px 0px;
+	left: 0px;
+	right: 0px;
+}
+ol.carousel-indicators li.active, ol.carousel-indicators li {
+	border: 1px solid #000;
+}
+label.form-control {
+	height: auto;
+	font-weight: inherit;
+}
+.red{color: #FF0000;}
+.green{color: #008000;}
+.yellow{color: #FFFF00;}
+.gold{color: #FFD700;}
+.orange{color: #FFA500;}
+.pink{color: #FFC0CB;}
+.cyan{color: #00FFFF;}
+.blue{color: #0000FF;}
+.deepskyblue{color: #00BFFF;}
+.purple{color: #800080;}
+.black{color: #000000;}
+.silver{color: #C0C0C0;}
+.maroon{color: #800000;}
+.white{color: #FFFFFF;}
+body { margin-top: 70px; }
+
+</style>
+</head>
+
+<body >
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<div class="container">
+  <a class="navbar-brand" href="#">关于作者</a>
+	<ul class="nav navbar-nav">
+		<li class="active"><a href="#info">基本信息</a></li>
+		<li><a href="#skill">技能</a></li>
+		<li><a href="#edu">教育</a></li>
+		<li><a href="#project">项目经验</a></li>
+	</ul>
+	<ul class="nav navbar-nav pull-right">
+		<li class="print"><a href="javascript:;">打印</a></li>
+	</ul>
+</div>
+<a href="https://github.com/ItMan70s"><img style="position: absolute; top: 0; right: 0; border: 0;" src="img/forkme.png" title="Fork me on GitHub"></a>
+</nav>
+<div class="container">
+<a name="info"></a>
+<div class="col-xs-12">
+	<div class="navbar navbar-default">
+一个爱看书，爱编码，爱动手DIY，乐观，积极向上的大男孩。<br />
+一个富有想象，充满梦想，努力为梦想奋斗的程序猿。
+	</div>
+</div>
+<div class="col-xs-6">
+	<nav class="navbar navbar-default">
+		<div class="container-fluid"><div class="navbar-header"><h2>基本信息</h2></div></div>
+		<div class="form-horizontal"><div class="form-group"><label class="col-xs-3 control-label">姓名</label><div class="col-xs-8"><label class="form-control">Job  （男）</label></div></div></div>
+		<div class="form-horizontal"><div class="form-group"><label class="col-xs-3 control-label">出生日期</label><div class="col-xs-8"><label class="form-control">1979-4-23</label></div></div></div>
+		<div class="form-horizontal"><div class="form-group"><label class="col-xs-3 control-label">联系电话</label><div class="col-xs-8"><label class="form-control">13718370479</label></div></div></div>
+		<div class="form-horizontal"><div class="form-group"><label class="col-xs-3 control-label">Email</label><div class="col-xs-8"><label class="form-control">zao-bao.zhang@hp.com</label></div></div></div>
+		<div class="form-horizontal"><div class="form-group"><label class="col-xs-3 control-label">居住地</label><div class="col-xs-8"><label class="form-control">北京</label></div></div></div>
+	<a name="skill"></a>
+		<div class="form-horizontal"><div class="form-group"><label class="col-xs-3 control-label">学历</label><div class="col-xs-8"><label class="form-control">大学本科</label></div></div></div>
+	</nav>
+</div><div class="col-xs-6 hidden-print" style="padding-top:10px;">
+	<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item active">
+      <img src="img/me.jpg" title="It's ME :)">
+	  <div class="carousel-caption">
+		<p>It's ME :)</p>
+	  </div>
+    </div>
+    <div class="item">
+      <img src="img/richtext.png" title="richtext">
+	  <div class="carousel-caption">
+		<h3>Rich Text</h3>
+		<p><a href="http://itman70s.github.io/richtext/">http://itman70s.github.io/richtext/ </a><br />At least 2 lines turn input/textarea into rich text editor</p>
+	  </div>
+    </div>
+    <div class="item">
+      <img src="img/tangrammy.PNG" title="Tangrammy">
+	  <div class="carousel-caption">
+		<h3>Tangrammy</h3>
+		<p><a href="http://itman70s.github.io/tangrammy/">http://itman70s.github.io/tangrammy/ </a><br />10 minutes to build your own web application</p>
+	  </div>
+    </div>
+    <div class="item">
+      <img src="img/ejia.PNG" title="老有所养">
+	  <div class="carousel-caption">
+		<p>老有所养</p>
+	  </div>
+    </div>
+    <div class="item">
+      <img src="img/hpsum.PNG" title="HPSUM">
+	  <div class="carousel-caption">
+		<h3>HP SUM</h3>
+		<p><a href="http://www.hp.com/go/hpsum">http://www.hp.com/go/hpsum </a><br />HP Smart Update Manager (HP SUM)</p>
+	  </div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <a class="carousel-control" style="left: 0px;" href="#carousel-example-generic" role="button" data-slide="prev" title="Previous">
+    <span class="glyphicon glyphicon-chevron-left icon-angle-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control" style="right: 0px;left: auto;" href="#carousel-example-generic" role="button" data-slide="next" title="Next">
+    <span class="glyphicon glyphicon-chevron-right icon-angle-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+</div>
+	
+<div class="col-xs-12">
+	<nav class="navbar navbar-default">
+		<div class="container-fluid clickable" data-toggle="collapse" href="#edu-detail" aria-expanded="true" ><div class="navbar-header"><h2 class="icon-double-angle-up">教育背景</h2></div></div>
+		<div id="edu-detail" class="collapse in"  aria-expanded="true">
+		<div class="form-horizontal"><div class="form-group"><label class="col-xs-2 control-label">大学</label><div class="col-xs-9">
+			<label class="form-control">1998/9-2002/7　武汉大学　<small>　计算机科学与技术专业　本科　学士学位</small></label>
+		</div></div></div>
+		<div class="form-horizontal"><div class="form-group"><label class="col-xs-2 control-label">培训</label><div class="col-xs-9">
+			<label class="form-control">PMBOK-项目管理基础知识体系 <small>(2007) </small></label>
+			<label class="form-control">日本研修 <small>(2007) </small></label>
+			<label class="form-control">UML 2.0 <small>(2006) </small></label>
+		</div></div></div>
+		<div class="form-horizontal"><div class="form-group"><label class="col-xs-2 control-label">证书</label><div class="col-xs-9">
+			<label class="form-control">系统架构设计师(高级职称) <small>(2013) </small></label>
+			<label class="form-control">日本语一级 <small>(2008) </small></label>
+			<label class="form-control">软件质量控制（SWQC）活动第一名 <small>(2007) </small></label>
+			<label class="form-control">ISO9000质量管理体系内审员 <small>(2007) </small></label>
+			<label class="form-control">优秀员工 <small>(2005) </small></label>
+	<a name="project"></a>
+			<label class="form-control">大学生数模竞赛湖北省一等奖 <small>(2001) </small></label>
+		</div></div></div>
+		</div>
+	</nav>
+</div>
+
+<div class="col-xs-12">
+	<nav class="navbar navbar-default">
+		<div class="container-fluid clickable" data-toggle="collapse" href="#skill-detail" aria-expanded="true"><div class="navbar-header"><h2 class="icon-double-angle-up">技能 <small> (熟练程度: 低 <span class="badge">1</span> ... <span class="badge">5</span> 高)</small></h2></div></div>
+		<div id="skill-detail" class="collapse in"  aria-expanded="true">
+		<div class="form-horizontal"><div class="form-group"><label class="col-xs-2 control-label">系统/服务平台</label><div class="col-xs-10">
+			<a class="filter im" href="javascript:;">Windows<span class="badge">4</span></a>
+			<a class="filter" href="javascript:;">Linux<span class="badge">2</span></a>
+			<a class="filter im" href="javascript:;">HP-UX<span class="badge">4</span></a>
+			<a class="filter im" href="javascript:;">Tomcat<span class="badge">4</span></a>
+			<a class="filter" href="javascript:;">Apache<span class="badge">2</span></a>
+			<a class="filter" href="javascript:;">IIS<span class="badge">2</span></a>
+			<a class="filter" href="javascript:;">Oracle9iAS, WebLogic<span class="badge">1</span></a>
+		</div></div></div>
+		<div class="form-horizontal"><div class="form-group"><label class="col-xs-2 control-label">开发语言</label><div class="col-xs-10">
+			<a class="filter im" href="javascript:;">Java<span class="badge">4</span></a>
+			<a class="filter" href="javascript:;">C++<span class="badge">3</span></a>
+			<a class="filter im" href="javascript:;">Javascript<span class="badge">5</span></a>
+			<a class="filter im" href="javascript:;">jQuery<span class="badge">4</span></a>
+			<a class="filter im" href="javascript:;">NodeJs<span class="badge">3</span></a>
+			<a class="filter" href="javascript:;">Ionic, Andriod<span class="badge">3</span></a>
+			<a class="filter im" href="javascript:;">Html,css<span class="badge">4</span></a>
+			<a class="filter" href="javascript:;">Php, VB<span class="badge">2</span></a>
+			<a class="filter" href="javascript:;">Cmd, Shell, Ant<span class="badge">3</span></a>
+			<a class="filter" href="javascript:;">MatLab, Perl<span class="badge">1</span></a>
+			<a class="filter" href="javascript:;">Rail, Ruby, Pathon<span class="badge">0</span></a>
+		</div></div></div>
+		<div class="form-horizontal"><div class="form-group"><label class="col-xs-2 control-label">辅助工具</label><div class="col-xs-10">
+			<a class="filter im" href="javascript:;">Eclipse<span class="badge">4</span></a>
+			<a class="filter" href="javascript:;">JBuilder<span class="badge">2</span></a>
+			<a class="filter im" href="javascript:;">NotePad++<span class="badge">5</span></a>
+			<a class="filter im" href="javascript:;">CVS, SVN<span class="badge">5</span></a>
+			<a class="filter" href="javascript:;">SourceSafe, ClearCase, GitHub<span class="badge">2</span></a>
+			<a class="filter im" href="javascript:;">Rose, JUDE, StarUML<span class="badge">4</span></a>
+			<a class="filter" href="javascript:;">VC6.0<span class="badge">3</span></a> 
+		</div></div></div>
+		<div class="form-horizontal"><div class="form-group"><label class="col-xs-2 control-label">数据库</label><div class="col-xs-10">
+			<a class="filter" href="javascript:;">Oracle<span class="badge">2</span></a>
+			<a class="filter im" href="javascript:;">Postgres<span class="badge">3</span></a>
+			<a class="filter im" href="javascript:;">MongoDB<span class="badge">3</span></a> 
+			<a class="filter" href="javascript:;">mySQL<span class="badge">2</span></a>
+		</div></div></div>
+		<div class="form-horizontal"><div class="form-group"><label class="col-xs-2 control-label">软技能</label><div class="col-xs-10">
+			<a class="filter im disabled" href="javascript:;">项目管理<span class="badge">4</span></a>
+			<a class="filter im disabled" href="javascript:;">设计模式<span class="badge">3</span></a>
+			<a class="filter disabled" href="javascript:;">MVC架构<span class="badge">5</span></a>
+			<a class="filter disabled" href="javascript:;">软件工程<span class="badge">4</span></a>
+			<a class="filter im disabled" href="javascript:;">UML<span class="badge">4</span></a>
+			<a class="filter disabled" href="javascript:;">重构<span class="badge">2</span></a>
+			<a class="filter disabled" href="javascript:;">日语<span class="badge">3</span></a>
+			<a class="filter disabled" href="javascript:;">英语<span class="badge">3</span></a>
+		</div></div></div>
+	<a name="edu"></a>
+		<div class="form-horizontal"><div class="form-group"><label class="col-xs-2 control-label">其它技能</label><div class="col-xs-9">
+			<label class="form-control">JSP, Severlet, Struts, Steven, EJB, JDBC, Hibernate, log4j, POI, JFreeChart, AJAX, XML, XSD, XSTL, Encryption, zip, Security</label>
+		</div></div></div>
+		</div>
+	</nav>
+</div>
+	
+
+<div class="col-xs-12">
+	<nav class="navbar navbar-default">
+		<div class="container-fluid"><div class="navbar-header"><h2>项目经验  <small>
+		<a class="btn btn-xs btn-link" show="all" href="javascript:;">显示:  全部项目</a>
+		<a class="btn btn-xs btn-link" show="opensource" href="javascript:;">公益项目</a>
+		<a class="btn btn-xs btn-link" show="hp" href="javascript:;">惠普项目</a>
+		<a class="btn btn-xs btn-link" show="nec" href="javascript:;">NEC项目</a>
+		<a class="btn btn-xs btn-link" show="neu" href="javascript:;">东软项目</a>
+		</small></h2></div></div>
+		<table class="table table-striped table-hover"><tbody>
+			<tr cop="opensource" skills="Html, Css, jQuery, Bootstrap 3, Notepad++, GitHub, SVN，javascript"><td>
+			<div class="container-fluid"><div class="navbar-header"><h3>Rich Text <small>(2015.05-2015.06 Open Source)</small></h3></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">描述</label><div class="col-xs-10"><label class="form-control">
+			&nbsp; Rich Text是基于Html5、Bootstrap3以及jQuery的javascript插件，只需要向input/Textarea的脚本中追加一个css定义，即可将其变成所见即所得的富文本输入框。<br />
+			本页右上方展示区可以找到Rich Text的缩略图，Demo及源代码请参见 <a target="_blank" href="http://itman70s.github.io/richtext/"> http://itman70s.github.io/richtext/ </a>
+			</label></div></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">职责</label><div class="col-xs-10"><label class="form-control">
+&nbsp; GitHub工程的创建与维护<br />
+&nbsp; Rich Text的需求采集、分析、设计以及实现。
+			</label></div></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">技能</label><div class="col-xs-10">
+			<label class="form-control">
+			<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt">&nbsp;* Html5, Css3, jQuery, Bootstrap 3, &nbsp;</p>
+			<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt">&nbsp;* Notepad++, GitHub, SVN&nbsp;</p>
+			</label></div></div></div>
+			</td></tr>
+			<tr cop="opensource" skills="PHP, Html, Css, jQuery, javascript, Bootstrap 2, JSON, ionic, mySQL, Notepad++, SVN, Andiod, iOS, nodejs"><td>
+			<div class="container-fluid"><div class="navbar-header"><h3>老有所养 <small>(2014.09-2015.03 公益项目)</small></h3></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">描述</label><div class="col-xs-10"><label class="form-control">
+			&nbsp; 老有所养是为养老院提供的老人日常服务的管理系统，包括店铺管理、老人基本信息管理、护工信息管理、服务项目管理、日常服务打卡等功能。<br />
+			&nbsp; 老有所养网站由Html5+jQuery+BootStrap+JSON+PHP实现，按Restful模式进行的架构设计，以店铺、员工、老人、护理项目为URI资源，进行新建、更新、取得以及删除。<br />
+			&nbsp; 老有所养Andriod、iOS手机客户端由Html5+ionic实现。
+			</label></div></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">职责</label><div class="col-xs-10"><label class="form-control">
+&nbsp; 老有所养网站的需求分析、设计以及实现<br />
+&nbsp; 老有所养手机客户端的需求分析、设计以及实现。
+			</label></div></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">技能</label><div class="col-xs-10">
+			<label class="form-control">
+			<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt">&nbsp;* PHP, Html5, Css3, jQuery, Bootstrap 2, JSON, ionic, mySQL&nbsp;</p>
+			<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt">&nbsp;* ThinkPHP, Notepad++, SVN, Andiod, iOS, nodeJS&nbsp;</p>
+			</label></div></div></div>
+			</td></tr>
+			<tr cop="opensource" skills="NodeJS, javascript, Html, Css, jQuery, javascript, Ajax, JSON, Bootstrap3 ,cmd, shell, Notepad++, SVN, MongoDB, Tomcat, Windows"><td>
+			<div class="container-fluid"><div class="navbar-header"><h3>Tangrammy <small>(2014.06至今 Open Source)</small></h3></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">描述</label><div class="col-xs-10"><label class="form-control">
+Tangrammy是基于Nodejs服务的用户自定义web应用的定制服务平台。内置丰富的控件，操作简易的定义，十分钟的时间打造一个量身定制的专属的web服务。<br>
+Tangrammy是B/S结构（RESTful架构），以数据表、web服务以及数据项作为URI资源，进行新建、更新、取得以及删除。网页采用Html5+Css3+Bootstrap3+jQuery，通过ajax异步请求或网页同步http请求与服务器交互html网页数据或JSON格式数据。服务器端采用Nodejs+ Express+Mongoose技术，定义四层处理结构：数据验证层、业务逻辑层、数据访问层以及表示层，通过Javascript 回调函数的形式各层依次处理http请求。将数据的表示和值分离，通过重定义数据表示和值对应关系，从而改变整个web应用中数据的含义；将web应用的字段与文字分离，通过重定义字段与文字的对应关系，从而改变字段的数据含义；通过显示、存储、编辑时自定义js脚本，将数据段之间的关系解耦，从而服务器端只关心数据的新建、更新、取得以及删除操作，而不用关心数据之间的关系。表示与数据分离，使得web应用的变更更加灵活。			</label></div></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">职责</label><div class="col-xs-10"><label class="form-control">
+				&nbsp; GitHub工程的创建与维护<br />
+				&nbsp; 代码重构<br />
+				&nbsp; 新需求采集、分析、设计以及实现。
+			</label></div></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">技能</label><div class="col-xs-10">
+			<label class="form-control">
+			<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt">&nbsp;* NodeJS, javascript, Html5, Css3, jQuery, Ajax, JSON, Bootstrap3&nbsp;</p>
+			<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt">&nbsp;* Notepad++, SVN, MongoDB, Tomcat&nbsp;</p>
+			<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt">&nbsp;* Windows</p>
+			</label></div></div></div>
+			</td></tr>
+			<tr cop="opensource" skills="J2EE(JSP, Servlet), eclipse, ant, Javascript, Html, xml, Css, jQuery, Ajax, zip, Eclipse, SVN, cmd, shell, Windows"><td>
+			<div class="container-fluid"><div class="navbar-header"><h3>Tangrammy(Java版) <small>(2010.04-2014.06 调研)</small></h3></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">描述</label><div class="col-xs-10"><label class="form-control">
+Tangrammy是基于Tomcat服务的用户自定义web应用的定制服务平台。内置丰富的控件，一个小时的时间打造一个量身定制的专属的web服务。<br>
+Tangrammy是B/S结构。网页采用Html+Css+jQuery，通过ajax异步请求或网页同步http请求与服务器交互html网页数据或xml格式数据。服务器端采用JSP+ Servlet技术，定义四层处理结构：数据验证层、业务逻辑层、数据访问层以及表示层，通过动态调用Javascript， 动态生成html页面，达到定制服务的目的。<br>
+该项目主要目的是探索动态定义应用的技术可行性、复杂度以及性能评价。			</label></div></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">职责</label><div class="col-xs-10"><label class="form-control">
+				&nbsp; 需求采集、分析、设计以及实现。
+			</label></div></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">技能</label><div class="col-xs-10">
+			<label class="form-control">
+			<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt">&nbsp;* Java(JSP, Servlet), Javascript, Html, xml, Css, jQuery, Ajax, zip, &nbsp;</p>
+			<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt">&nbsp;* Eclipse, SVN&nbsp;</p>
+			<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt">&nbsp;* Windows</p>
+			</label></div></div></div>
+			</td></tr>
+			<tr cop="hp" skills="QT(C++), VC, DOM, starUML, Jude, XML, Html, Css, jQuery, javascript, hpOneView, JSON, mySQL,Notepad++, QT creator, cmd, shell, CVS, SVN, MS Office ,Linux, Windows, HP-UX"><td>
+			<div class="container-fluid"><div class="navbar-header"><h3>HPSUM <small>(2010.07-2015.07 HP)</small></h3></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">描述</label><div class="col-xs-10"><label class="form-control">
+			<span style="color: rgb(85, 85, 85);">&nbsp; &nbsp;HP Smart Update Manager (HP SUM)是用于HP服务器、机柜、登月等设备的固件和软件维护的工具。自带诊断引擎用以发现当前以及关联系统中已安装的软件、固件信息，为当前已经相关联的系统提供统一的升级服务。</span><br>
+			<span style="color: rgb(85, 85, 85);">&nbsp; &nbsp;HPSUM 支持多个操作平台，包括Windows、linux、HP-UX以及VMware，而且与系统底层硬件和协议打交道，所以采用QT（跨平台的C++）进行开发实现。</span><br>
+			<span style="color: rgb(85, 85, 85);">&nbsp; 该工具按版本分两种架构：</span><br>
+			<ul><li><font color="#555555">HPSUM 4.7~5.4是C/S结构（事件驱动架构）: GUI/CLI + Service + engine。服务器端按事件驱动模式设计，用状态机来控制Node的状态以及相关操作， 通过ssh协议与远程engine进行交互，远程engine通过Http协议访问服务器端资源。</font><br></li>
+			<li><font color="#555555">HPSUM 6.0~7.4是B/S结构（RESTful架构）: Html/CLI + Service + engine。新的软件按</font><span style="color: rgb(85, 85, 85);">RESTful架构，以Component、Baseline、Node和Group作为URI资源，进行新建、更新、取得以及删除。新的结构下，Html/CLI 的操作均向Service发送http请求并处理来自service的html/JSON格式的响应数据。新的Service用状态机来控制Http请求、Baseline、Node以及Group状态，通过SSH协议和远程服务器传输文件，通过HTTP协议与远程Engine进行通信。</span></li></ul>
+			</label></div></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">职责</label><div class="col-xs-10"><label class="form-control">
+&nbsp; 作为项目的中国区的Lead，带领团队完成HPSUM HP-UX平台的Online、Offline版本的设计和开发作业，基于Restful和html5的新架构的设计和实现作业，以及维护期的bug修复和新功能添加。<br />
+&nbsp; &nbsp;组织团队进行经验总结、知识分享、提升技能。 
+			</label></div></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">技能</label><div class="col-xs-10">
+			<label class="form-control">
+			<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt">&nbsp;* QT(C++), DOM, XML, Html5, Css3, jQuery, hpOneView, JSON, My-SQL&nbsp;</p>
+			<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt">&nbsp;* Notepad++, QT creator, CVS, SVN, MS Office&nbsp;</p>
+			<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt">&nbsp;* Linux, Windows, HP-UX</p>
+			</label></div></div></div>
+			</td></tr>
+			<tr cop="hp" skills="J2SE, XML, XSD, XSLT, Eclipse, Ant, LoadRunner, SAP  "><td>
+			<div class="container-fluid"><div class="navbar-header"><h3>SAP的 XML加速卡性能评价 <small>(2009.03- 2010.06 HP)</small></h3></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">描述</label><div class="col-xs-10"><label class="form-control">
+				&nbsp; 惠普，SAP，Scipio三方合作项目。项目主要负责评价xml文件在SAP应用中软件加速和硬件加速的性能。
+			</label></div></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">职责</label><div class="col-xs-10"><label class="form-control">
+				&nbsp; 评价XML加速卡在SAP商业应用环境中的性能
+			</label></div></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">技能</label><div class="col-xs-10">
+			<label class="form-control">
+				<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt">&nbsp;* Java, XML, XSD, XSLT  &nbsp;</p>
+				<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt">&nbsp;*  Eclipse, Ant, LoadRunner, SAP &nbsp;</p>
+			</label></div></div></div>
+			</td></tr>
+			<tr cop="hp" skills="C++, PHP, Javascript, CSS, XHTML, DOM, AJAX, XML, XSLT,SVN, CVS, ClearCase, WinMerge, MS Office, JSUnit,HP-UX, Windows,Postgres"><td>
+			<div class="container-fluid"><div class="navbar-header"><h3>系统缺陷管理系统 <small>(2008.02-2009.03 HP)</small></h3></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">描述</label><div class="col-xs-10"><label class="form-control">
+			该系统是HP服务器的系统管理系统的子系统，包括两个子系统：Event管理系统和服务器设备健康测试系统。
+			</label></div></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">职责</label><div class="col-xs-10"><label class="form-control">
+				<p> * 开发了缺陷管理系统的服务器健康测试的Web页面 </p>
+				<p> * 维护Event管理系统 - 缺陷管理子系统 </p> 
+			</label></div></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">技能</label><div class="col-xs-10">
+			<label class="form-control">
+				<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt"><span style="line-height: 1.42857143; font-family: 宋体; color: black;">* </span><span style="line-height: 1.42857143; font-family: 'Times New Roman', serif;">C++, PHP, Javascript, CSS, XHTML,
+				DOM, AJAX, XML, XSLT</span><br></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt"><span style="font-family:宋体;mso-bidi-font-family:宋体;color:black">* </span><span style="font-family:&quot;Times New Roman&quot;,serif;
+				mso-fareast-font-family:&quot;Times New Roman&quot;">SVN, CVS, ClearCase, WinMerge, MS
+				Office, JSUnit <o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt"><span style="font-family:宋体;mso-bidi-font-family:宋体;color:black">* </span><span style="font-family:&quot;Times New Roman&quot;,serif;
+				mso-fareast-font-family:&quot;Times New Roman&quot;">HP-Unix, Windows <o:p></o:p></span></p>
+				<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt"><span style="font-size:11.0pt;line-height:115%;font-family:&quot;Times New Roman&quot;,serif;
+				mso-fareast-font-family:宋体;mso-hansi-font-family:Symbol;mso-ansi-language:EN-US;
+				mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">* </span><span style="font-size:11.0pt;
+				line-height:115%;font-family:&quot;Times New Roman&quot;,serif;mso-fareast-font-family:
+				&quot;Times New Roman&quot;;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;
+				mso-bidi-language:AR-SA">Postgres</span><br></p>
+			</label></div></div></div>
+			</td></tr>
+			<tr cop="nec" skills="J2SE, Encryption, starUML, Jude, Compression,Eclipse, SVN, WinMerge, MS Office, JUnit, JTEST，CheckStyle, Mantis-BugSystem, JUDE，StarUML, cmd, HP-UX, Linux, Windows,Project Management, CMMI, ISO200007, UML, Design Pattern, Refactor"><td>
+			<div class="container-fluid"><div class="navbar-header"><h3>Log收集管理系统 <small>(2007.02-2008.02  NEC)</small></h3></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">描述</label><div class="col-xs-10"><label class="form-control">
+				&nbsp; 该系统是C/S结构的J2SE应用。通过Agent收集各管理机器的系统运行日志文件、监视软件的运行日志文件，被监视软件发生异常时的系统运行状态数据和软件自身的关联数据和log文件。服务器端负责对收集上来的数据文件统一管理，包括：格式化显示，以提高log解析的效率；系统/软件异常时的数据文件的查询；log文件内容差分比较；log文件集群的差分比较等。
+			</label></div></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">职责</label><div class="col-xs-10"><label class="form-control">
+				&nbsp; 项目SubLeader-负责任务分配，进度管理，品质管理以及负责和客户沟通。 <br />
+				&nbsp; 管理核心模块-原始Log数据和关联数据的新建、更新、删除、查找以及读取功能的接口设计和实现。
+			</label></div></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">技能</label><div class="col-xs-10">
+			<label class="form-control">
+				<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt">&nbsp;* J2SE, Encryption, Compression  &nbsp;</p>
+				<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt">&nbsp;* Eclipse, SVN, WinMerge, MS Office, JUnit, JTEST，CheckStyle, Mantis-BugSystem, JUDE，StarUML, HP-UX, Linux, Windows &nbsp;</p>
+				<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt">&nbsp;* Project Management, CMMI, ISO200007, UML, Design Pattern, Refactor  &nbsp;</p>
+			</label></div></div></div>
+			</td></tr>
+			<tr cop="nec" skills="J2EE, ant, javascript, Jude, Tomcat, Struts, JSP, AJAX, JFreeChart, POI, Hibernate, Postgres, Eclipse, SVN, WinMerge, MS Office, JUnit, JTEST, FindBugs, GhostTrace, CheckStyle, Mantis-BugSystem, JUDE, StarUML,HP-UX, Linux, Windows, Project Management, CMMI, ISO200007, UML, Design Pattern, Refactor"><td>
+			<div class="container-fluid"><div class="navbar-header"><h3>NEC服务器整合系统 <small>(2005.09-2006.08 NEC)</small></h3></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">描述</label><div class="col-xs-10"><label class="form-control">
+				&nbsp; 该系统是基于MVC结构（Hibernate+Struts）的J2EE应用的服务器统合管理软件。用Perl写的工具在各个服务器上运行，收集系统中的CPU、内存、网络、硬盘等的使用情况以及服务器的硬件配置信息。通过Web页面进行系统信息分组、查询、更新，根据分组的服务器数据进行统计分析，评估当前系统资源状况。将系统地主要资源数据以图形/表格这种直观的形式展现给用户，同时给出诸如关掉哪些服务器以节约能源，增购哪些型号的服务器以满足未来的运行需求等优化方案。 
+			</label></div></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">职责</label><div class="col-xs-10"><label class="form-control">
+				&nbsp; 项目Leader-负责需求管理，任务分配，进度管理，品质管理以及负责和客户沟通。<br />
+				&nbsp; 系统设计-Web架构
+			</label></div></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">技能</label><div class="col-xs-10">
+			<label class="form-control">
+				<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt">&nbsp;* J2EE, Tomcat, Struts, JSP, AJAX, JFreeChart, POI, Hibernate, Postgres &nbsp;</p>
+				<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt">&nbsp;* Eclipse, SVN, WinMerge, MS Office, JUnit, JTEST, FindBugs, GhostTrace, CheckStyle, Mantis-BugSystem, JUDE, StarUML &nbsp;</p>
+				<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt">&nbsp;* Project Management, CMMI, ISO200007, UML, Design Pattern, Refactor &nbsp;</p>
+				<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt">&nbsp;* HP-UX, Linux, Windows &nbsp;</p>
+			</label></div></div></div>
+			</td></tr>
+			<tr cop="neu" skills="C++ Application(MFC), VC, Rose, Visio Studio, SourceSafe, MS Office, MS Project, Project Management, ISO200007, Windows"><td>
+			<div class="container-fluid"><div class="navbar-header"><h3>报纸排版系统-简易表组 <small>(2004.06- 2005.06 东软)</small></h3></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">描述</label><div class="col-xs-10"><label class="form-control">
+				&nbsp; 该系统是报纸排版系统的子系统，是基于MVC架构的C++的类似于Excel表格功能制表软件。该系统的一个亮点功能是，它可根据各个单元格的内容自动调各行列的宽度或高度，以便于表格更适合报纸的排版需求和表格内容的阅读需求。该系统在日本评为优秀软件系统。项目分两期：第一期是原有排版系统的维护，成员8人；第二期是简易表组系统，成员15人。
+			</label></div></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">职责</label><div class="col-xs-10"><label class="form-control">
+				&nbsp; 项目Leader-负责任务分配，进度管理，品质管理以及负责和客户沟通（成员8，15人）
+			</label></div></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">技能</label><div class="col-xs-10">
+			<label class="form-control">
+				<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt">&nbsp;* C++ Application(MFC)  &nbsp;</p>
+				<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt">&nbsp;* Visio Studio, SourceSafe, MS Office, MS Project, Project Management, ISO200007, Windows &nbsp;</p>
+			</label></div></div></div>
+			</td></tr>
+			<tr cop="neu" skills="C++ Application(MFC), VC, Rose, Visio Studio, SourceSafe, MS Office, MS Project, Project Management, ISO200007, Windows"><td>
+			<div class="container-fluid"><div class="navbar-header"><h3>棋谱编辑软件 <small>(2004.03- 2004.05 东软)</small></h3></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">描述</label><div class="col-xs-10"><label class="form-control">
+				&nbsp; 该软件是基于MVC架构的C++绘图软件，用于编辑围棋、日本象棋和五子棋的比赛棋谱的编辑软件。日本朝日新闻报社，用该软件做成棋谱图片，以便于报道这三种棋类比赛情况。
+			</label></div></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">职责</label><div class="col-xs-10"><label class="form-control">
+				&nbsp; 项目Leader-负责任务分配，进度管理，品质管理以及负责和客户沟通。（成员3人） <br />
+				&nbsp; 关键MVC结构设计、实现、测试。
+			</label></div></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">技能</label><div class="col-xs-10">
+			<label class="form-control">
+				<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt">&nbsp;* C++ Application(MFC)  &nbsp;</p>
+				<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt">&nbsp;* Visio Studio, SourceSafe, MS Office, MS Project, Project Management, ISO200007, Windows &nbsp;</p>
+			</label></div></div></div>
+			</td></tr>
+			<tr cop="neu" skills="J2EE, ant, html, css, javascript, Rose, Web Logic, Steven Framwork, Struts, JSP, EJB, JBuilder, SourceSafe, WinMerge, MS Office, JUnit, Oracle9iAS"><td>
+			<div class="container-fluid"><div class="navbar-header"><h3>东芝零件管理系统 <small>(2003.07-2004.03 东软)</small></h3></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">描述</label><div class="col-xs-10"><label class="form-control">
+				&nbsp; 该系统是基于MVC结构（EJB+Struts+Steven）的J2EE应用的零部件订购管理系统。对于零部件供应商，他可以向系统中录入零部件基本信息、相应的参数以及报价；对于东芝各子公司和部门可以根据产品名称或者具体参数查询和订购。该系统有两个亮点： 一是基于Struts框架开发并应用了Steven框架，该框架扩展了EJB的SessionBean的应用以及JSP动态数据处理能力。还一个是动态数据库的功能， 用户可以自由地动态地创建/更新/查询各式各样的零部件。
+			</label></div></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">职责</label><div class="col-xs-10"><label class="form-control">
+				&nbsp; 动态检索功能模块的设计、开发和测试;系统设计-Web架构
+			</label></div></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">技能</label><div class="col-xs-10">
+			<label class="form-control">
+				<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt">&nbsp;* J2EE, Web Logic, Steven Framwork, Struts, JSP, EJB  &nbsp;</p>
+				<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt">&nbsp;* JBuilder, SourceSafe, WinMerge, MS Office, JUnit, Oracle9iAS &nbsp;</p>
+			</label></div></div></div>
+			</td></tr>
+			<tr cop="neu" skills="VB, SourceSafe"><td>
+			<div class="container-fluid"><div class="navbar-header"><h3>十六国银行的报表管理系统 <small>(2003.05- 2003.05 东软)</small></h3></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">描述</label><div class="col-xs-10"><label class="form-control">
+				&nbsp; 银行系统的地区银行的报表生成和打印功能模块。
+			</label></div></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">职责</label><div class="col-xs-10"><label class="form-control">
+				&nbsp; 报表生成和打印功能的开发和测试
+			</label></div></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">技能</label><div class="col-xs-10">
+			<label class="form-control">
+				<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt">&nbsp;* VB, SourceSafe &nbsp;</p>
+			</label></div></div></div>
+			</td></tr>
+			<tr cop="neu" skills="C, cc/gcc, SourceSafe, Lint, Solaris"><td>
+			<div class="container-fluid"><div class="navbar-header"><h3>报纸排版系统的32位到64位移植 <small>(2002.12- 2003.05 东软)</small></h3></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">描述</label><div class="col-xs-10"><label class="form-control">
+				&nbsp; 报纸排版系统由32位移植到64位Solaris系统下。
+			</label></div></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">职责</label><div class="col-xs-10"><label class="form-control">
+				&nbsp; 负责消除64位下的编译警告和代码错误;自动修正编译警告的小工具的制作。
+			</label></div></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">技能</label><div class="col-xs-10">
+			<label class="form-control">
+				<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt">&nbsp;* C, cc/gcc, SourceSafe, Lint , Solaris &nbsp;</p>
+			</label></div></div></div>
+			</td></tr>
+			<tr cop="neu" skills="J2EE, ant, JSP, Severlet, html, css, Web Logic"><td>
+			<div class="container-fluid"><div class="navbar-header"><h3>营农系统 <small>(2002.07-2002.09 东软)</small></h3></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">描述</label><div class="col-xs-10"><label class="form-control">
+				&nbsp; 日本农业信息发布系统。
+			</label></div></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">职责</label><div class="col-xs-10"><label class="form-control">
+				&nbsp; 单元测试和功能测试
+			</label></div></div></div>
+			<div class="form-horizontal"><div class="form-group"><label class="col-xs-1 control-label">技能</label><div class="col-xs-10">
+			<label class="form-control">
+				<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt">&nbsp;* JSP, Severlet, Web Logic  &nbsp;</p>
+			</label></div></div></div>
+			</td></tr>
+		</tbody></table>
+	</nav>
+</div>
+     
+
+</div>
+
+
+<script>
+
+$(document).on("click", '[data-toggle="collapse"]', function() {
+	var css = $(this).find("h2"); 
+	if (css.attr("class").indexOf("icon-double-angle-up") < 0) {
+		css.removeClass("icon-double-angle-down");
+		css.addClass("icon-double-angle-up");
+	} else {
+		css.removeClass("icon-double-angle-up");
+		css.addClass("icon-double-angle-down");
+	}
+});
+$(document).on("click", '.navbar-nav > li', function() {
+	if ($(this).attr("class") == "print") return;
+	$("li.active").removeClass("active");
+	$(this).addClass("active");
+	
+});
+$(document).on("click", '.filter', function() {
+	if ($(this).attr("class").indexOf("disabled") > -1) return;
+	
+	var skills = $(this).text().replace(/[\d\.]/g, "").replace(/\+/g, "\\+").replace(/,/g, "|");
+	if (skills == "Java") {
+		skills = "J2SE|J2EE";
+	}
+	skills = new RegExp(skills, "ig");
+	$("tr").each(function() {
+		if (($(this).attr("skills") || "").match(skills)) {
+			$(this).show();
+		} else {
+			$(this).hide();
+		}
+	});
+});
+
+$(document).on("click", '[show]', function() {
+	var show = $(this).attr("show");
+	$("tr").each(function() {
+		if ($(this).attr("cop") == show || "all" == show) {
+			$(this).show();
+		} else {
+			$(this).hide();
+		}
+	});
+});
+
+	$('.print').on('click', function(){	
+		$('.print').hide();
+		html2canvas(document.body, {
+	        onrendered: function(canvas) {
+	        	
+	        	$("#page").hide();
+	            document.body.appendChild(canvas);
+	            window.print();
+	            $('canvas').remove();
+	            $("#page").show();
+				$('.print').show();
+	        }
+	    });
+	    
+	});
+</script>
+</body>
+</html>
