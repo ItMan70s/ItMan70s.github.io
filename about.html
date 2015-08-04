@@ -145,6 +145,16 @@ body { margin-top: 70px; }
 	.col-xs-6 {
 		width: 100%;
 	}
+	.form-group > .col-xs-1, .form-group > .col-xs-2 {
+		padding-right: 5px;
+	}
+	.form-group > .col-xs-9, .form-group > .col-xs-10, .form-group > .col-xs-11 {
+		padding-left: 1px;
+		padding-right: 5px;
+	}
+	.hidden-print {
+		display: none;
+	}
 }
 </style>
 </head>
@@ -634,6 +644,8 @@ $(document).on("click", '.filter', function() {
 			$(this).hide();
 		}
 	});
+	$('[href="#skill-detail"]').click();
+	$('[href="#project"]').click();
 });
 
 $(document).on("click", '[show]', function() {
