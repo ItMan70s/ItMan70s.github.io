@@ -163,15 +163,13 @@ body { margin-top: 70px; }
 		<li><a href="#project">项目经验</a></li>
 	</ul>
 	<ul class="nav navbar-nav pull-right">
+		<li><a href="http://itman70s.github.io/about.pdf" data-toggle="dropdown" data-placement="right" title="下载PDF格式简历">下载</a></li>
 		<li class="dropdown">
           <a href="javascript:;" class="dropdown-toggle itman70s_menu" data-toggle="dropdown" data-placement="right" title="All about ItMan70s.github.io"><img class="pull-left" src="img/logo_w.png"> <b class="caret"></b></a>
           <ul class="dropdown-menu itman70s_sub_menu">
           </ul>
         </li>
-		<li class="print"><a href="http://itman70s.github.io/about.pdf" data-toggle="dropdown" data-placement="bottom" title="下载PDF格式简历">下载</a></li>
-		<li class="print"><a href="javascript:;">打印</a></li>
 	</ul>
-	<a href="https://github.com/ItMan70s"><img style="position: absolute; right: 0; border: 0;" src="img/forkme.png" title="Fork me on GitHub"></a>
     </nav>
 </div>
 </header>
@@ -643,21 +641,6 @@ $(document).on("click", '[show]', function() {
 	});
 });
 
-	$('.print').on('click', function(){	
-		$('.print').hide();
-		html2canvas(document.body, {
-	        onrendered: function(canvas) {
-	        	
-	        	$("#page").hide();
-	            document.body.appendChild(canvas);
-	            window.print();
-	            $('canvas').remove();
-	            $("#page").show();
-				$('.print').show();
-	        }
-	    });
-	    
-	});
 </script>
 </body>
 </html>
