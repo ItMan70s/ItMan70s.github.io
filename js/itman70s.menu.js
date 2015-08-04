@@ -14,7 +14,7 @@ try {
 	$(".itman70s_sub_menu").html(itman70s_menu);
 	$('[data-placement]').tooltip();
 	
-	$(".itman70s_sub_menu").parents(".pull-right").append('<a href="https://github.com/ItMan70s"><img style="position: absolute; right: 0; border: 0;" src="img/forkme.png" title="Fork me on GitHub"></a>');
+	$(".itman70s_sub_menu").parents(".pull-right").append('<a href="https://github.com/ItMan70s"><img style="position: absolute; right: 0; border: 0;" src="/img/forkme.png" title="Fork me on GitHub"></a>');
 		
 	$('.print').on('click', function(){	
 		$('.print').hide();
