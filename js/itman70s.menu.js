@@ -2,6 +2,7 @@
 var itman70s_menu = '<li><a href="http://itman70s.github.io/" data-placement="left" title="To ItMan70s.github.io">ITMan70s</a></li>\n' + 
             '<li><a href="https://github.com/ItMan70s/tangrammy" data-placement="left" title="To Tangrammy page">Tangrammy</a></li>\n' + 
             '<li><a href="http://itman70s.github.io/richtext" data-placement="left" title="To github.io/richtext">Rich Text</a></li>\n' + 
+            '<li><a href="http://itman70s.github.io/angular-movable" data-placement="left" title="To github.io/angular-movable">AngularJS Movable</a></li>\n' + 
             '<li><a href="http://itman70s.github.io/transform.html" data-placement="left" title="transform for timestamp base64 urlencode">Transform</a></li>\n' + 
             '<li><a href="http://itman70s.github.io/about.html" data-placement="left" title="To know itman70s?">About</a></li>\n' + 
             '<li class="print"><a href="javascript:;" data-placement="left" title="Print current page">Print</a></li>\n';
