@@ -4,6 +4,7 @@ var ItManTos_menu = '<li><a href="http://ItManTos.github.io/" data-placement="le
             '<li><a href="http://ItManTos.github.io/richtext" data-placement="left" title="To github.io/richtext">Rich Text</a></li>\n' + 
             '<li><a href="http://ItManTos.github.io/angular-movable" data-placement="left" title="To github.io/angular-movable">AngularJS Movable</a></li>\n' + 
             '<li><a href="http://ItManTos.github.io/transform.html" data-placement="left" title="transform for timestamp base64 urlencode">Transform</a></li>\n' + 
+            '<li><a href="http://mail.tangrammy.com/feedback" data-placement="left">Feedback</a></li>\n' + 
             '<li><a href="http://ItManTos.github.io/about.html" data-placement="left" title="To know ItManTos?">About</a></li>\n' + 
             '<li class="print"><a href="javascript:;" data-placement="left" title="Print current page">Print</a></li>\n';
 		
